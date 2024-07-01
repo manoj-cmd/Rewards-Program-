@@ -14,17 +14,17 @@ export const calculateRewardPoints = (amount) => {
 export const calculateRewards = (transactions) => {
   const rewards = {};
 
-  transactions.forEach(({ customer, date, amount }) => {
+  transactions.forEach(({ customerId, date, amount }) => {
     const month = new Date(date).getMonth() + 1;
-    if (!rewards[customer]) {
-      rewards[customer] = { total: 0, monthly: {} };
+    if (!rewards[customerId]) {
+      rewards[customerId] = { total: 0, monthly: {} };
     }
-    if (!rewards[customer].monthly[month]) {
-      rewards[customer].monthly[month] = 0;
+    if (!rewards[customerId].monthly[month]) {
+      rewards[customerId].monthly[month] = 0;
     }
     const points = calculateRewardPoints(amount);
-    rewards[customer].monthly[month] += points;
-    rewards[customer].total += points;
+    rewards[customerId].monthly[month] += points;
+    rewards[customerId].total += points;
   });
 
   return rewards;

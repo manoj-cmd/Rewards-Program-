@@ -8,14 +8,13 @@ test('calculateRewardPoints', () => {
 });
 
 test('calculateRewards', () => {
-  
   const transactions = [
-    { customer: Alice, date: '2024-01-10', amount: 120 },
-    { customer: Bob, date: '2024-02-20', amount: 110 },
-    { customer: Anil, date: '2024-03-15', amount: 50 },
+    { customerId: 1, date: '2024-01-15', amount: 120 },
+    { customerId: 1, date: '2024-02-15', amount: 75 },
   ];
   const rewards = calculateRewards(transactions);
   expect(rewards[1].total).toBe(115);
   expect(rewards[1].monthly[1]).toBe(90);
   expect(rewards[1].monthly[2]).toBe(25);
 });
+

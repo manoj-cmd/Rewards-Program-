@@ -1,18 +1,14 @@
+// src/api.js
 export const fetchTransactions = () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve([
-          { customer: 'Rahul', amount: 120, date: '2024-01-10' },
-          { customer: 'Sunil', amount: 75, date: '2024-01-15' },
-          { customer: 'Rahul', amount: 200, date: '2024-02-10' },
-          { customer: 'Sunil', amount: 60, date: '2024-02-20' },
-          { customer: 'Rahul', amount: 50, date: '2024-03-10' },
-          { customer: 'Sunil', amount: 110, date: '2024-03-15' },
-          { customer: 'Anil', amount: 210, date: '2024-01-15' },
-          { customer: 'Sunil', amount: 110, date: '2024-02-15' },
-          { customer: 'Anil', amount: 50, date: '2024-03-15' },
-        ]);
-      }, 1000);
-    });
-  };
-  
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve([
+        { customerId: 1, date: '2024-01-15', amount: 120 },
+        { customerId: 1, date: '2024-02-15', amount: 75 },
+        { customerId: 2, date: '2024-01-20', amount: 200 },
+        { customerId: 2, date: '2024-03-10', amount: 50 },
+        // Add more sample transactions
+      ]);
+    }, 1000);
+  });
+};

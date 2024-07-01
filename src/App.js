@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import React, { useEffect, useState } from 'react';
+import './App.css';
+import { fetchTransactions } from './api';
+import { calculateRewards } from './utils';
+
+const App = () => {
+  const [transactions, setTransactions] = useState([]);
+  const [rewards, setRewards] = useState({});
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const data = await fetchTransactions();
+        setTransactions(data);
+        const calculatedRewards = calculateRewards(data);
+        setRewards(calculatedRewards);
+      } catch (error) {
+        setError('Failed to load transactions.');
+      }
+    };
+    loadData();
+  }, []);
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="mainDiv">
+      <h1>Rewards Program</h1>
+      {Object.keys(rewards).map((customer) => (
+        <div key={customer}>
+          <h2>Customer Name - {customer}</h2>
+          <p>Total Points: {rewards[customer].total}</p>
+          <b>Monthly Points:</b>
+          <ul>
+            {Object.keys(rewards[customer].monthly).map((month) => (
+              <li key={month}>
+                Month {month}: {rewards[customer].monthly[month]} points
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   );
-}
+};
 
 export default App;

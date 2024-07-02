@@ -1,4 +1,3 @@
-// src/utils.js
 export const calculateRewardPoints = (amount) => {
   let points = 0;
   if (amount > 100) {

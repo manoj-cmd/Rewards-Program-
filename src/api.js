@@ -1,4 +1,3 @@
-// src/api.js
 export const fetchTransactions = () => {
   return new Promise((resolve) => {
     setTimeout(() => {

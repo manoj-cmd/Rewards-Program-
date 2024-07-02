@@ -4,22 +4,23 @@ import { calculateRewards } from '../utils';
 import '../App.css'
 
 const RewardsComponete = () => {
-    const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState([]);
   const [rewards, setRewards] = useState({});
   const [error, setError] = useState(null);
 
+// Pure function to handle loading data
+const loadData = async (fetchTransactions, calculateRewards, setTransactions, setRewards, setError) => {
+  try {
+    const data = await fetchTransactions();
+    setTransactions(data);
+    const calculatedRewards = calculateRewards(data);
+    setRewards(calculatedRewards);
+  } catch (error) {
+    setError('Failed to load transactions.');
+  }
+};
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        const data = await fetchTransactions();
-        setTransactions(data);
-        const calculatedRewards = calculateRewards(data);
-        setRewards(calculatedRewards);
-      } catch (error) {
-        setError('Failed to load transactions.');
-      }
-    };
-    loadData();
+    loadData(fetchTransactions, calculateRewards, setTransactions, setRewards, setError);
   }, []);
 
   if (error) {

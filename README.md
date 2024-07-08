@@ -1,4 +1,4 @@
-# Customer Rewards Program (Frontend)
+# Customer Rewards Program UI
 
 This project implements the frontend for a rewards program for a retailer using React JS. The application calculates reward points for customers based on their purchases and displays them in a user-friendly interface.
 
